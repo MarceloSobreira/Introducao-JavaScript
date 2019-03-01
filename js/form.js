@@ -3,13 +3,14 @@ botaoAdicionar.addEventListener("click", function(event){
     event.preventDefault();
     
     var form = document.querySelector("#form-adiciona");
-
-    //Extraindo informações do paciente do form
     var paciente = obtemPacienteDoFormulario(form);
-    console.log(paciente);
-    
-    //Cria a tr e td do paciente
+
     var pacienteTr = montaTr(paciente);
+
+    if(!validaPaciente(paciente)){
+        console.log("paciente Invalido");
+        return;
+    }
 
     var tabela = document.querySelector("#tabela-pacientes");
     tabela.appendChild(pacienteTr);
@@ -49,5 +50,13 @@ function montaTd(dado, classe) {
     td.classList.add(classe);
 
     return td;
+}
+
+function validaPaciente(paciente){
+    if(validaPeso(paciente.peso)){
+        return true;
+    }else {
+        return false;
+    }
 }
    
